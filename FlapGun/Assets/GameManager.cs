@@ -29,12 +29,12 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameSignals.FruitDestroyed += OnFruitDestroyed;
+        GameSignals.FruitHit += OnFruitDestroyed;
     }
 
     private void OnDisable()
     {
-        GameSignals.FruitDestroyed -= OnFruitDestroyed;
+        GameSignals.FruitHit -= OnFruitDestroyed;
     }
 
     private void OnFruitDestroyed(FruitTarget fruit)

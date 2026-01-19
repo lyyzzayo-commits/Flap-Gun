@@ -31,6 +31,7 @@ public class ScoreUI : MonoBehaviour
     private void OnScoreUp()
     {
         score += scorePerHit;
+        Debug.Log("하마");
         RefreshUI();
     }
 
