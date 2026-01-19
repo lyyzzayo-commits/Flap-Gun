@@ -13,6 +13,6 @@ public static class GameSignals
     public static void RaiseFruitDestroyed(FruitTarget fruit) => FruitDestroyed?.Invoke(fruit);
     public static event Action ScoreUp;
     public static void RaiseScoreUP() => ScoreUp?.Invoke();
-    public static event Action<GameOverReason> GameOver;
-    public static void RaiseGameOver(GameOverReason reason) => GameOver?.Invoke(reason);
+    public static event Action GameOver;
+    public static void RaiseGameOver() => GameOver?.Invoke();
 }

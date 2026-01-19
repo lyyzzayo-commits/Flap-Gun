@@ -62,15 +62,25 @@ public sealed class GameManager : MonoBehaviour
         roundManager.StartFirstRound();
     }
 
-    public void EndGame(GameOverReason reason)
+    public void EndGame()
     {
+        if (roundManager.remainingTime != 0f)
+            return;
+
+        if (roundManager.remainingTime == 0f)
+        {
+            roundManager.TriggerGameOver();
+        }
+        
         if (state == GameState.GameOver)
             return;
+
+        
 
         state = GameState.GameOver;
 
         Time.timeScale = 0f;
-        GameSignals.RaiseGameOver(reason);
+        GameSignals.RaiseGameOver();
     }
 
     public void RestartGame()

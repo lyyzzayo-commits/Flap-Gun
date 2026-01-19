@@ -4,10 +4,7 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum GameOverReason
-{
-    TimeUp,
-}
+
 
 [Serializable]
 public sealed class RoundConfig
@@ -25,7 +22,7 @@ public sealed class RoundManager : MonoBehaviour
 
     [Header("Runtime (Read Only)")]
     [SerializeField] private int currentRound = 0;
-    [SerializeField] private float remainingTime = 0f;
+    [SerializeField] public float remainingTime = 0f;
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isGameOver = false;
 
@@ -91,14 +88,14 @@ public sealed class RoundManager : MonoBehaviour
             return;
         if (remainingTime <= 0f)
         {
-            TriggerGameOver(GameOverReason.TimeUp);
+            TriggerGameOver();
             return;
         }
 
         isRunning = true;
     }
 
-    public void TriggerGameOver(GameOverReason reason)
+    public void TriggerGameOver()
     {
         if(IsGameOver)
            return;
