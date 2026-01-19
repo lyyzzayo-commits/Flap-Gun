@@ -9,7 +9,7 @@ using UnityEngine;
 [Serializable]
 public sealed class RoundConfig
 {
-    [Min(0.1f)] public float baseTimeLimit = 5f;
+    [Min(0.1f)] public float baseTimeLimit = 15.0f;
     [Min(0f)] public float timeDecreasePerRound = 0.25f;
     [Min(0.1f)] public float minTimeLimt =1.5f;
     [Min(0)] public int maxRounds = 0; // 0 = unlimited
@@ -35,7 +35,7 @@ public sealed class RoundManager : MonoBehaviour
     public bool IsRunning => isRunning;
     public bool IsGameOver => isGameOver;
 
-    private float _currentTimeLimit = 0f;
+    
     private float _tickAccumulator = 0f;
 
     // Tick rate for UI updates (set 0 to tick every frame)
@@ -69,7 +69,7 @@ public sealed class RoundManager : MonoBehaviour
         currentRound = 1;
 
         float timeLimit = ComputeTimeLimitForRound(currentRound);
-        _currentTimeLimit = timeLimit;
+       
         remainingTime = timeLimit;
 
         targetManager.RespawnForRound(currentRound);
@@ -95,7 +95,6 @@ public sealed class RoundManager : MonoBehaviour
         targetManager.RespawnForRound(currentRound);
 
         float timeLimit = ComputeTimeLimitForRound(currentRound);
-        _currentTimeLimit = timeLimit;
         remainingTime = timeLimit;
 
         StartTimer();
@@ -132,7 +131,7 @@ public sealed class RoundManager : MonoBehaviour
         if (roundIndex < 1) roundIndex = 1;
 
         if(config == null)
-           return 5f;
+           return 15.0f;
 
            float time = config.baseTimeLimit - config.timeDecreasePerRound * (roundIndex -1);
         if (time < config.minTimeLimt)
