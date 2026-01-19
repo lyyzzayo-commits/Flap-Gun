@@ -77,6 +77,8 @@ private void OnFruitDestroyed(FruitTarget fruit)
         state = GameState.GameOver;
         
         Time.timeScale = 0f;
+
+        GameSignals.RaiseGameOver(reason);
     }
 
     public void RestartGame()
