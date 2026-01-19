@@ -45,6 +45,7 @@ public sealed class FruitTarget : MonoBehaviour, IHitReceiver
         if (targetCollider != null) targetCollider.enabled = false;
 
         GameSignals.RaiseFruitHit(this);
+        Debug.Log("나맞았어");
 
         // 파괴 애니메이션 재생
         if (animator != null && !string.IsNullOrWhiteSpace(breakTriggerName))

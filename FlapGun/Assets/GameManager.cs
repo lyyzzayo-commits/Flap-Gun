@@ -43,7 +43,6 @@ public sealed class GameManager : MonoBehaviour
     private void OnFruitDestroyed(FruitTarget fruit)
     {
         if (state != GameState.Playing) return;
-
         scoreManager.AddScore(collisionScore);
         roundManager.RequestNextRound();
     }
