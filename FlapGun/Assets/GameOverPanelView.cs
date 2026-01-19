@@ -19,7 +19,7 @@ public class GameOverPanelView : MonoBehaviour
         GameSignals.GameOver -= OnGameOver;
     }
 
-    private void OnGameOver(GameOverReason reason)
+    private void OnGameOver()
     {
         if (panel != null) panel.SetActive(true);
         // reason 텍스트 표시도 여기서 처리
