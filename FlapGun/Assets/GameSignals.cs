@@ -18,4 +18,8 @@ public static class GameSignals
 
     public static event Action TimeUp;
     public static void RaiseTimeUp() => TimeUp?.Invoke();
+
+    public static event Action<float, float> TimeUpdated;
+    public static void RaiseTimeUpdated(float remaining, float max)
+        => TimeUpdated?.Invoke(remaining, max);
 }

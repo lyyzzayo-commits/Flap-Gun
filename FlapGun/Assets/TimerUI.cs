@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TimerUI : MonoBehaviour
+public sealed class TimerUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Image fillImage;
+
+    private void OnEnable()
     {
-        
+        GameSignals.TimeUpdated += OnTimeUpdated;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        GameSignals.TimeUpdated -= OnTimeUpdated;
+    }
+
+    private void OnTimeUpdated(float remaining, float max)
+    {
+        if (max <= 0f) return;
+
+        fillImage.fillAmount = remaining / max;
     }
 }

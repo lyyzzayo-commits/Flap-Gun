@@ -1,7 +1,6 @@
 
 using System;
-using NUnit.Framework;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 
@@ -36,18 +35,25 @@ public sealed class RoundManager : MonoBehaviour
     public bool IsGameOver => isGameOver;
 
     
-    private float _tickAccumulator = 0f;
-
-    // Tick rate for UI updates (set 0 to tick every frame)
-    [SerializeField] private float tickInterval = 0.1f;
+    
 
     private bool timeUpRaised;
+
+    private float maxTime = 5f;
 
     private void Update()
     {
         if(timeUpRaised) return;
+        if(!isRunning) return;
+
+
 
         remainingTime -= Time.deltaTime;
+
+        remainingTime = Mathf.Max(remainingTime,0f);
+        
+        GameSignals.RaiseTimeUpdated(remainingTime,maxTime);
+        
         if(remainingTime <= 0f)
         {
             remainingTime = 0f;
@@ -71,6 +77,9 @@ public sealed class RoundManager : MonoBehaviour
         float timeLimit = ComputeTimeLimitForRound(currentRound);
        
         remainingTime = timeLimit;
+        maxTime = timeLimit;
+
+        GameSignals.RaiseTimeUpdated(remainingTime,maxTime);
 
         targetManager.RespawnForRound(currentRound);
 
@@ -96,6 +105,10 @@ public sealed class RoundManager : MonoBehaviour
 
         float timeLimit = ComputeTimeLimitForRound(currentRound);
         remainingTime = timeLimit;
+
+        maxTime = remainingTime;
+
+        GameSignals.RaiseTimeUpdated(remainingTime,maxTime);
 
         StartTimer();
     }
