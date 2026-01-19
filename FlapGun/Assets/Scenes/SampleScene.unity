@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c576ca5456ca8c46b6a509ae912508e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerUI
-  fillImage: {fileID: 0}
+  fillImage: {fileID: 1796984851}
 --- !u!114 &138139057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,8 +2545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 4.5344, y: -36}
-  m_SizeDelta: {x: 204.2923, y: 100}
+  m_AnchoredPosition: {x: -0.000011206, y: -37}
+  m_SizeDelta: {x: 335, y: 135.5198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1796984851
 MonoBehaviour:
