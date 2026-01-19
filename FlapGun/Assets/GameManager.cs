@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,14 +26,18 @@ public sealed class GameManager : MonoBehaviour
         StartGame();
     }
 
+    
+
     private void OnEnable()
     {
         GameSignals.FruitHit += OnFruitDestroyed;
+        GameSignals.TimeUp += OnTimeUP;
     }
 
     private void OnDisable()
     {
         GameSignals.FruitHit -= OnFruitDestroyed;
+        GameSignals.TimeUp -= OnTimeUP;
     }
 
     private void OnFruitDestroyed(FruitTarget fruit)
@@ -63,24 +66,19 @@ public sealed class GameManager : MonoBehaviour
     }
 
     public void EndGame()
-    {
-        if (roundManager.remainingTime != 0f)
-            return;
-
-        if (roundManager.remainingTime == 0f)
-        {
-            roundManager.TriggerGameOver();
-        }
-        
+    { 
         if (state == GameState.GameOver)
             return;
-
-        
 
         state = GameState.GameOver;
 
         Time.timeScale = 0f;
         GameSignals.RaiseGameOver();
+    }
+
+    private void OnTimeUP()
+    {
+        EndGame();
     }
 
     public void RestartGame()

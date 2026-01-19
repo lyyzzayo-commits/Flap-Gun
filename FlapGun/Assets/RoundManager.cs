@@ -22,7 +22,7 @@ public sealed class RoundManager : MonoBehaviour
 
     [Header("Runtime (Read Only)")]
     [SerializeField] private int currentRound = 0;
-    [SerializeField] public float remainingTime = 0f;
+    [SerializeField] private float remainingTime = 0f;
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isGameOver = false;
 
@@ -41,10 +41,27 @@ public sealed class RoundManager : MonoBehaviour
     // Tick rate for UI updates (set 0 to tick every frame)
     [SerializeField] private float tickInterval = 0.1f;
 
+    private bool timeUpRaised;
+
+    private void Update()
+    {
+        if(timeUpRaised) return;
+
+        remainingTime -= Time.deltaTime;
+        if(remainingTime <= 0f)
+        {
+            remainingTime = 0f;
+            timeUpRaised = true;
+            GameSignals.RaiseTimeUp();
+        }
+    }
+
     
 
     public void StartFirstRound()
     {
+        timeUpRaised = false;
+
         if (IsGameOver)
             return;
         if(currentRound > 0)
@@ -63,6 +80,8 @@ public sealed class RoundManager : MonoBehaviour
 
     public void RequestNextRound()
     {
+        timeUpRaised = false;
+        
         if (isGameOver)
             return;
         if (currentRound <= 0)

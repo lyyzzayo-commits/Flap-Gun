@@ -15,4 +15,7 @@ public static class GameSignals
     public static void RaiseScoreUP() => ScoreUp?.Invoke();
     public static event Action GameOver;
     public static void RaiseGameOver() => GameOver?.Invoke();
+
+    public static event Action TimeUp;
+    public static void RaiseTimeUp() => TimeUp?.Invoke();
 }
