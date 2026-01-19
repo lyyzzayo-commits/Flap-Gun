@@ -7,5 +7,6 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int sc)
     {
         score += sc;
+        GameSignals.RaiseScoreUP();
     }
 }

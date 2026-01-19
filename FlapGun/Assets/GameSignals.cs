@@ -11,4 +11,6 @@ public static class GameSignals
     public static void RaiseFruitHit(FruitTarget fruit) => FruitHit?.Invoke(fruit);
     public static event Action<FruitTarget> FruitDestroyed;
     public static void RaiseFruitDestroyed(FruitTarget fruit) => FruitDestroyed?.Invoke(fruit);
+    public static event Action ScoreUp;
+    public static void RaiseScoreUP() => ScoreUp?.Invoke();
 }
