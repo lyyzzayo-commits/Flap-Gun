@@ -29,6 +29,7 @@ public sealed class RoundManager : MonoBehaviour
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isGameOver = false;
 
+    [SerializeField] private TargetManager targetManager;
     
     
 
@@ -57,6 +58,8 @@ public sealed class RoundManager : MonoBehaviour
         _currentTimeLimit = timeLimit;
         remainingTime = timeLimit;
 
+        targetManager.RespawnForRound(currentRound);
+
 
         StartTimer();
     }
@@ -72,6 +75,8 @@ public sealed class RoundManager : MonoBehaviour
         }
 
         currentRound++;
+
+        targetManager.RespawnForRound(currentRound);
 
         float timeLimit = ComputeTimeLimitForRound(currentRound);
         _currentTimeLimit = timeLimit;
