@@ -7,10 +7,9 @@ public class TargetManager : MonoBehaviour
     [SerializeField] private GameObject targetPrefab;
 
     [Header("Optional")]
-    [SerializeField] private Transform spawnRoot;          
-    [SerializeField] private Transform[] spawnPoints;      
+       
     
-    [SerializeField] private float spawnRadius = 3f;
+    
 
     [SerializeField] private Camera targetCamera; // 비우면 Camera.main
     [SerializeField] private float margin = 0.1f;

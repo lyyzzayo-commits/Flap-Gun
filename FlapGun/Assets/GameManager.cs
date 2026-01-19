@@ -10,8 +10,6 @@ public enum GameState
     GameOver
 }
 
-
-
 public sealed class GameManager : MonoBehaviour
 {
     [Header("Refs")]
@@ -24,69 +22,60 @@ public sealed class GameManager : MonoBehaviour
     [Header("Runtime (Read Only)")]
     [SerializeField] private GameState state = GameState.None;
 
-    
+    private void Awake()
+    {
+        StartGame();
+    }
 
-   private void OnEnable()
-{
-    GameSignals.FruitDestroyed += OnFruitDestroyed;
-}
+    private void OnEnable()
+    {
+        GameSignals.FruitDestroyed += OnFruitDestroyed;
+    }
 
-private void OnDisable()
-{
-    GameSignals.FruitDestroyed -= OnFruitDestroyed;
-}
+    private void OnDisable()
+    {
+        GameSignals.FruitDestroyed -= OnFruitDestroyed;
+    }
 
-private void OnFruitDestroyed(FruitTarget fruit)
-{
-    if (state != GameState.Playing) return;
+    private void OnFruitDestroyed(FruitTarget fruit)
+    {
+        if (state != GameState.Playing) return;
 
-    scoreManager.AddScore(collisionScore);
-
-   
-    roundManager.RequestNextRound();
-    
-}
+        scoreManager.AddScore(collisionScore);
+        roundManager.RequestNextRound();
+    }
 
     public void StartGame()
     {
         if (state == GameState.Playing)
             return;
 
-        if(roundManager == null || scoreManager == null)
+        if (roundManager == null || scoreManager == null)
         {
 #if UNITY_EDITOR
-        Debug.LogError("[GameManager] Missing references (roundManager / scoreManager).");
+            Debug.LogError("[GameManager] Missing references (roundManager / scoreManager).");
 #endif
-        return;
+            return;
         }
 
         state = GameState.Playing;
-
         roundManager.StartFirstRound();
     }
-
-
-
-
 
     public void EndGame(GameOverReason reason)
     {
         if (state == GameState.GameOver)
-        return;
-        
-        state = GameState.GameOver;
-        
-        Time.timeScale = 0f;
+            return;
 
+        state = GameState.GameOver;
+
+        Time.timeScale = 0f;
         GameSignals.RaiseGameOver(reason);
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    
 }
