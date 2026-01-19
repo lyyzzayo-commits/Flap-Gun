@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoundManager
   config:
-    baseTimeLimit: 5
+    baseTimeLimit: 15
     timeDecreasePerRound: 0.25
     minTimeLimt: 1.5
     maxRounds: 0
