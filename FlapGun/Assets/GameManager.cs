@@ -36,16 +36,14 @@ private void OnDisable()
     GameSignals.FruitDestroyed -= OnFruitDestroyed;
 }
 
-private void OnFruitDestroyed(int collisionScore, bool roundClear)
+private void OnFruitDestroyed(FruitTarget fruit)
 {
     if (state != GameState.Playing) return;
 
     scoreManager.AddScore(collisionScore);
 
    
-    if (roundClear)
-        roundManager.RequestNextRound();
-
+    roundManager.RequestNextRound();
     
 }
 
